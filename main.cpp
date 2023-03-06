@@ -1,5 +1,6 @@
 #include <iostream>
 #include "raylib.h"
+#include "rlgl.h"
 #include <vector>
 #define MAX_TOUCH_POINTS 64
 #define MAX_TOUCH_POINTS_MAK 63
@@ -19,12 +20,14 @@ int main()
     int screenHeight = GetScreenHeight();
     vector<Path> paths;
     Path *currentPath = nullptr;
-
+    SetConfigFlags(FLAG_MSAA_4X_HINT); //4次多重采样，以达到抗锯齿的效果
     InitWindow(screenWidth, screenHeight, "mouse input");
     ToggleFullscreen();
     SetTargetFPS(60);
 
     int index = 0;
+    rlSetLineWidth(5);
+    rlEnableSmoothLines();
     while (!WindowShouldClose())
     {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
